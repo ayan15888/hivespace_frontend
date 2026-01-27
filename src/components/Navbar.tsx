@@ -19,7 +19,7 @@ type NavbarProps = {
 const Navbar = ({ items, buttons }: NavbarProps) => {
   return (
     <header className="flex items-center justify-between px-6 py-4 border-b bg-white shadow-sm">
-      <h1 className="text-lg font-bold">Hivespace</h1>
+      <h1 className="text-lg font-bold color text-black">Hivespace</h1>
 
       <nav className="flex items-center gap-6">
         {items.map((item) => (

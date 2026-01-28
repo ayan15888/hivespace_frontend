@@ -13,7 +13,7 @@ const OrgMarquee = () => {
         {[...marqueeItems, ...marqueeItems].map((item, index) => (
           <div
             key={`${item}-${index}`}
-            className="mx-3 inline-flex items-center gap-2 rounded-full border border-dashed border-slate-500 bg-slate-50 px-4 py-1.5 text-xs font-medium text-slate-700 shadow-sm"
+            className="mx-3 font-serif inline-flex items-center gap-2 rounded-full border border-solid  border-black  bg-white px-4 py-1.5 text-lg font-medium text-black shadow-sm"
           >
             <span className="h-2.5 w-2.5 rounded-full bg-black" />
             <span>{item}</span>

@@ -2,6 +2,23 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "EB Garamond HS";
+  src: url("./assets/fonts/EBGaramond.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "EB Garamond HS";
+  src: url("./assets/fonts/EBGaramonditalic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -116,12 +133,25 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    font-family: "EB Garamond HS", ui-serif, Georgia, "Times New Roman", serif;
+  }
   body {
     @apply bg-background text-foreground;
+    font-family: "EB Garamond HS", ui-serif, Georgia, "Times New Roman", serif;
+  }
+  #root {
+    font-family: inherit;
   }
 }
 
 @layer utilities {
+  .font-brand-italic {
+    font-family: "EB Garamond HS Italic", "EB Garamond HS", ui-serif, Georgia, "Times New Roman", serif;
+    font-style: italic;
+  }
+  
+
   .marquee-container {
     position: relative;
     overflow: hidden;
@@ -140,5 +170,42 @@
     100% {
       transform: translateX(-50%);
     }
+  }
+
+  @keyframes hs-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes hs-rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes hs-shimmer {
+    0% {
+      transform: translateX(-30%);
+    }
+    100% {
+      transform: translateX(130%);
+    }
+  }
+
+  .hs-float {
+    animation: hs-float 1.6s ease-in-out infinite;
+  }
+
+  .hs-rotate {
+    animation: hs-rotate 1.9s linear infinite;
+  }
+
+  .hs-shimmer {
+    animation: hs-shimmer 1.3s ease-in-out infinite;
   }
 }

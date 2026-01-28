@@ -5,7 +5,7 @@ import { Badge } from "../components/ui/badge"
 
 const Docs = () => {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-slate-900">
+    <div className="flex min-h-screen flex-col bg-white text-black900">
       <Navbar
         items={[
           { path: "/", label: "Home" },
@@ -18,7 +18,7 @@ const Docs = () => {
       />
 
       <main className="flex-1">
-        <div className="mx-auto max-w-6xl px-6 py-12 sm:px-10 space-y-14">
+        <div className="mx-auto max-w-6xl px-6 py-12 md:px-10 space-y-14">
 
           {/* Header */}
           <header className="space-y-4">
@@ -30,7 +30,7 @@ const Docs = () => {
               HiveSpace Documentation
             </h1>
 
-            <p className="max-w-3xl text-slate-600 text-sm sm:text-base">
+            <p className="max-w-3xl text-black600 text-sm sm:text-base">
               HiveSpace is an opinionated, Jira-style project management tool.
               It enforces a simple hierarchy and a shared task vocabulary so
               teams stay aligned without overthinking the process.
@@ -46,7 +46,7 @@ const Docs = () => {
                 <CardTitle>Hierarchy model</CardTitle>
               </CardHeader>
 
-              <CardContent className="space-y-4 text-sm text-slate-700">
+              <CardContent className="space-y-4 text-sm text-black700">
                 <ol className="list-decimal pl-5 space-y-2">
                   <li>
                     <strong>Organization</strong> – Top-level container.
@@ -84,7 +84,7 @@ const Docs = () => {
                 <CardTitle>Product company example</CardTitle>
               </CardHeader>
 
-              <CardContent className="text-sm text-slate-700 space-y-2">
+              <CardContent className="text-sm text-black700 space-y-2">
                 <ul className="list-disc pl-5 space-y-1">
                   <li><strong>Organization:</strong> Acme Inc.</li>
                   <li><strong>Workspace:</strong> Product</li>
@@ -96,7 +96,7 @@ const Docs = () => {
                   </li>
                 </ul>
 
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-black500">
                   Agencies can treat each client as an organization and reuse
                   the same structure.
                 </p>
@@ -113,7 +113,7 @@ const Docs = () => {
                 <CardTitle>Status system</CardTitle>
               </CardHeader>
 
-              <CardContent className="space-y-4 text-sm text-slate-700">
+              <CardContent className="space-y-4 text-sm text-black700">
                 <p>
                   Each task card has exactly one core status. These statuses are
                   shared across all teams for consistent reporting.
@@ -161,7 +161,7 @@ const Docs = () => {
             <h2 className="text-2xl font-bold">Summary</h2>
 
             <Card className="border-dashed border-slate-200">
-              <CardContent className="text-sm text-slate-700 space-y-2 pt-6">
+              <CardContent className="text-md text-black space-y-2 pt-6">
                 <ul className="list-disc pl-5 space-y-1">
                   <li>Strict hierarchy keeps structure predictable</li>
                   <li>Teams are the execution unit</li>

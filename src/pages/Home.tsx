@@ -157,8 +157,8 @@ const Home = () => {
               <Badge className="border border-dashed border-slate-200 bg-amber-50 text-amber-700">
                 Friendly launchpad
               </Badge>
-              <p className="text-2xl font-semibold text-slate-900">Ship faster with a board that feels light.</p>
-              <p className="text-slate-600">
+              <p className="text-2xl font-semibold text-black">Ship faster with a board that feels light.</p>
+              <p className="text-black">
                 Bring structure, keep the humor, and keep your team focused on what matters.
               </p>
             </div>

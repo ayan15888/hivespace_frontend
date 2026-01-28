@@ -117,6 +117,7 @@ const Home = () => {
                   size="lg"
                   variant="outline"
                   className="rounded-full border-dashed border-slate-300 bg-white px-6 text-slate-900"
+                  
                 >
                   View docs
                 </Button>

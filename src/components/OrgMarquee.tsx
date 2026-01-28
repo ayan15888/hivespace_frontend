@@ -8,7 +8,7 @@ const marqueeItems = [
 
 const OrgMarquee = () => {
   return (
-    <section className="marquee-container border-y border-dashed border-slate-200 bg-white/70 py-4">
+    <section className="marquee-container border-y border-dashed border-slate-200 bg-transparent py-4">
       <div className="marquee-track">
         {[...marqueeItems, ...marqueeItems].map((item, index) => (
           <div

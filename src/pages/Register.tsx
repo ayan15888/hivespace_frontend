@@ -1,13 +1,53 @@
+import { useState } from "react"
 import { Sparkles } from "lucide-react"
+
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
+
 import { Label } from "../components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card"
 import { Input } from "../components/ui/input"
 import { Button } from "../components/ui/button"
+
 import { colors } from "../constants/color"
+import { registerUser } from "../services/authservices"
 
 const Register = () => {
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError(null)
+    setLoading(true)
+
+    try {
+      await registerUser({
+        username,
+        email,
+        password,
+      })
+
+      // Redirect after successful registration
+      window.location.href = "/login"
+    } catch (err: any) {
+      setError(
+        err?.response?.data?.message || "Registration failed. Try again."
+      )
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-white text-slate-900">
       <Navbar
@@ -20,91 +60,99 @@ const Register = () => {
 
       <main
         style={{
-          background: `radial-gradient(circle at top left, ${colors.accentSoft}66 0, transparent 55%), radial-gradient(circle at bottom right, ${colors.accentSoft}80 0, transparent 60%)`,
+          background: `radial-gradient(circle at top left, ${colors.accentSoft}66 0, transparent 55%),
+                       radial-gradient(circle at bottom right, ${colors.accentSoft}80 0, transparent 60%)`,
         }}
-        className="flex-1 bg-white text-slate-900"
+        className="flex-1"
       >
         <div className="mx-auto flex max-w-6xl flex-1 items-center justify-center px-6 py-10 sm:px-10">
           <div className="grid w-full gap-10 md:grid-cols-[1.1fr_1fr] md:items-center">
+            {/* LEFT CONTENT */}
             <div className="space-y-4">
               <span className="inline-flex items-center gap-2 rounded-full border border-dashed border-slate-300 bg-white px-3 py-1 text-xs font-medium text-slate-700">
                 <Sparkles className="h-3 w-3 text-amber-400" />
                 Create your HiveSpace
               </span>
-              <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
+
+              <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
                 Register once, ship often.
               </h1>
+
               <p className="max-w-md text-sm text-slate-600 sm:text-base">
-                Set up your workspace and start organizing issues in a comic-light board that stays out of the way.
+                Set up your workspace and start organizing issues with clarity.
               </p>
             </div>
 
-            <Card className="w-full max-w-md justify-self-end border-dashed border-slate-200 bg-white shadow-lg backdrop-blur">
+            {/* REGISTER CARD */}
+            <Card className="w-full max-w-md justify-self-end border-dashed border-slate-200 bg-white shadow-lg">
               <CardHeader className="space-y-1">
-                <CardTitle className="text-xl text-slate-900">Create an account</CardTitle>
-                <CardDescription className="text-slate-500">
+                <CardTitle className="text-xl">
+                  Create an account
+                </CardTitle>
+                <CardDescription>
                   Enter your details to spin up your first space.
                 </CardDescription>
               </CardHeader>
+
               <CardContent>
-                <form className="space-y-5">
+                <form className="space-y-5" onSubmit={handleSubmit}>
+                  {/* USERNAME */}
                   <div className="grid gap-2">
-                    <Label htmlFor="name" className="text-slate-800">
-                      Name
-                    </Label>
+                    <Label htmlFor="username">Username</Label>
                     <Input
-                      id="name"
-                      type="text"
+                      id="username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                       placeholder="Ada Lovelace"
-                      className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400"
                       required
                     />
                   </div>
 
+                  {/* EMAIL */}
                   <div className="grid gap-2">
-                    <Label htmlFor="email" className="text-slate-800">
-                      Email
-                    </Label>
+                    <Label htmlFor="email">Email</Label>
                     <Input
                       id="email"
                       type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@team.com"
-                      className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400"
                       required
                     />
                   </div>
 
+                  {/* PASSWORD */}
                   <div className="grid gap-2">
-                    <Label htmlFor="password" className="text-slate-800">
-                      Password
-                    </Label>
+                    <Label htmlFor="password">Password</Label>
                     <Input
                       id="password"
                       type="password"
-                      className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       required
                     />
                   </div>
 
-                  <div className="grid gap-2">
-                    <Label htmlFor="org" className="text-slate-800">
-                      Organization name
-                    </Label>
-                    <Input
-                      id="org"
-                      type="text"
-                      placeholder="Your org or team name"
-                      className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400"
-                    />
-                  </div>
+                  {/* ERROR */}
+                  {error && (
+                    <p className="text-sm text-red-600">{error}</p>
+                  )}
 
-                  <Button type="submit" className="mt-2 w-full rounded-full bg-slate-900 text-white hover:bg-black">
-                    Register
+                  {/* SUBMIT */}
+                  <Button
+                    type="submit"
+                    disabled={loading}
+                    className="mt-2 w-full rounded-full bg-slate-900 text-white hover:bg-black"
+                  >
+                    {loading ? "Creating account..." : "Register"}
                   </Button>
 
                   <p className="pt-2 text-center text-xs text-slate-500">
                     Already have an account?{" "}
-                    <a href="/login" className="font-medium text-slate-900 underline-offset-4 hover:underline">
+                    <a
+                      href="/login"
+                      className="font-medium text-slate-900 hover:underline"
+                    >
                       Log in
                     </a>
                   </p>

@@ -1,6 +1,7 @@
 import { Sparkles, Zap, ListChecks, Clock } from "lucide-react"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
+import OrgMarquee from "../components/OrgMarquee"
 import { Button } from "../components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { Badge } from "../components/ui/badge"
@@ -9,36 +10,75 @@ import { colors } from "../constants/color"
 const featureList = [
   {
     icon: <Sparkles className="h-5 w-5 text-amber-500" />,
-    title: "Playful by design",
-    copy: "A minimalist workspace with comic energy so teams stay engaged.",
+    title: "Organizations to teams",
+    copy: "Model your hierarchy from organizations to workspaces, projects, and the teams that ship the work.",
   },
   {
     icon: <ListChecks className="h-5 w-5 text-sky-500" />,
-    title: "Boards that guide",
-    copy: "Swimlanes, priorities, and checklists ready out of the box.",
+    title: "Workspaces & projects",
+    copy: "Group related projects inside focused workspaces so every squad sees just what they need.",
   },
   {
     icon: <Clock className="h-5 w-5 text-rose-500" />,
-    title: "Fast hand-offs",
-    copy: "Lightweight UI keeps everyone in flow—no digging through clutter.",
+    title: "Team status tags",
+    copy: "Track to do, pending, done, errors, and bugs with simple comic-style tags on every task.",
   },
 ]
 
+const TAG_STYLES: Record<string, {
+  border: string
+  bg: string
+  dot: string
+  text: string
+}> = {
+  "To do": {
+    border: "border-black",
+    bg: "bg-blue-700",
+    dot: "bg-blue-500",
+    text: "text-white",
+  },
+  Pending: {
+    border: "border-black",
+    bg: "bg-yellow-700",
+    dot: "bg-yellow-500",
+    text: "text-white",
+  },
+  Done: {
+    border: "border-black",
+    bg: "bg-green-700",
+    dot: "bg-green-500",
+    text: "text-white",
+  },
+  Error: {
+    border: "border-black",
+    bg: "bg-red-700",
+    dot: "bg-red-500",
+    text: "text-white",
+  },
+  Bug: {
+    border: "border-black",
+    bg: "bg-purple-700",
+    dot: "bg-purple-400",
+    text: "text-white",
+  },
+}
+
+
 const mockColumns = [
   {
-    name: "To Do",
-    color: "bg-amber-100 border-amber-200",
-    items: ["Sketch onboarding flow", "Define ready criteria", "Collect bug list"],
+    name: "To do",
+    color: "bg-amber-50 border-amber-800",
+    items: ["Plan sprint for Org Alpha", "Create workspace for Design", "Draft project roadmap"],
   },
   {
-    name: "Doing",
-    color: "bg-sky-100 border-sky-200",
-    items: ["Build issue cards", "Hook up filters"],
+    name: "Pending / In review",
+    color: "bg-sky-50 border-sky-800",
+    items: ["Approve Team Orbit setup", "Review bug triage board"],
   },
   {
-    name: "Done",
-    color: "bg-emerald-100 border-emerald-200",
-    items: ["Project kickoff", "Retro notes"],
+    name: "Done & bugs",
+    color: "bg-emerald-50 border-emerald-800",
+    items: ["Launch Org Beta workspace", "Fix login error bug"],
   },
 ]
 
@@ -66,15 +106,14 @@ const Home = () => {
           <section className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
             <div className="flex flex-col gap-6">
               <Badge className="w-fit border border-dashed border-slate-200 bg-white text-xs uppercase tracking-wide text-slate-600 shadow-sm">
-                Jira, but friendlier
+                From org to team
               </Badge>
               <div className="space-y-4">
                 <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-                  A playful board for serious teams
+                  One playful space for your whole organization
                 </h1>
                 <p className="text-lg text-slate-700 sm:text-xl">
-                  HiveSpace keeps your squad aligned with a clean, comic-inspired
-                  board—minimal noise, maximum momentum.
+                  HiveSpace lets you create organizations, spin up workspaces, nest multiple projects, and give every team a clear place to track their work.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
@@ -88,7 +127,7 @@ const Home = () => {
                 >
                   View docs
                 </Button>
-                <span className="flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-sm text-slate-600 shadow-sm backdrop-blur">
+                <span className="flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-sm text-slate-600 shadow-sm backdrop-blur border border-dashed border-amber-900">
                   <Zap className="h-4 w-4 text-amber-500" />
                   <span>Setup in under 2 minutes</span>
                 </span>
@@ -130,6 +169,24 @@ const Home = () => {
                       </div>
                     </div>
                   ))}
+
+<div className="col-span-full mt-2 flex flex-wrap gap-2 text-[11px]">
+  {["To do", "Pending", "Done", "Error", "Bug"].map((tag) => {
+    const style = TAG_STYLES[tag]
+
+    return (
+      <span
+        key={tag}
+        className={`inline-flex items-center gap-1 rounded-full border border-solid px-2 py-0.5
+        ${style.border} ${style.bg} ${style.text}`}
+      >
+        <span className={`h-1.5 w-1.5 rounded-full ${style.dot}`} />
+        <span>{tag}</span>
+      </span>
+    )
+  })}
+</div>
+
                 </CardContent>
               </Card>
             </div>
@@ -153,6 +210,8 @@ const Home = () => {
               </Card>
             ))}
           </section>
+
+          <OrgMarquee />
 
           <section className="rounded-3xl border border-dashed border-slate-200 bg-white p-8 shadow-sm backdrop-blur md:flex md:items-center md:justify-between">
             <div className="space-y-2">

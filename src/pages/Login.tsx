@@ -73,6 +73,19 @@ const Login = () => {
                     />
                   </div>
 
+                  <div className="flex items-center justify-between text-xs text-slate-500">
+                    <label className="inline-flex items-center gap-2">
+                      <input type="checkbox" className="h-3.5 w-3.5 rounded border-slate-300 text-slate-900" />
+                      <span>Remember me</span>
+                    </label>
+                    <button
+                      type="button"
+                      className="font-medium text-slate-900 underline-offset-4 hover:underline"
+                    >
+                      Forgot password?
+                    </button>
+                  </div>
+
                   <Button type="submit" className="mt-2 w-full rounded-full bg-slate-900 text-white hover:bg-black">
                     Log in
                   </Button>

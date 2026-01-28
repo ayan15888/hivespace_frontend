@@ -86,6 +86,18 @@ const Register = () => {
                     />
                   </div>
 
+                  <div className="grid gap-2">
+                    <Label htmlFor="org" className="text-slate-800">
+                      Organization name
+                    </Label>
+                    <Input
+                      id="org"
+                      type="text"
+                      placeholder="Your org or team name"
+                      className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400"
+                    />
+                  </div>
+
                   <Button type="submit" className="mt-2 w-full rounded-full bg-slate-900 text-white hover:bg-black">
                     Register
                   </Button>

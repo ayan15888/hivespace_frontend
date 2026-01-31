@@ -135,6 +135,7 @@
   }
   html {
     font-family: "EB Garamond HS", ui-serif, Georgia, "Times New Roman", serif;
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-background text-foreground;

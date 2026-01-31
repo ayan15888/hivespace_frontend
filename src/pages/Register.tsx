@@ -1,6 +1,6 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Sparkles } from "lucide-react"
-
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 
@@ -19,6 +19,7 @@ import { colors } from "../constants/color"
 import { registerUser } from "../services/authservices"
 
 const Register = () => {
+  const navigate = useNavigate()
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -27,21 +28,15 @@ const Register = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError(null)
     setLoading(true)
-
     try {
-      await registerUser({
-        username,
-        email,
-        password,
-      })
-
-      // Redirect after successful registration
-      window.location.href = "/login"
-    } catch (err: any) {
+      await registerUser({ username, email, password })
+      navigate("/dashboard")
+    } catch (err: unknown) {
       setError(
-        err?.response?.data?.message || "Registration failed. Try again."
+        err && typeof err === "object" && "response" in err && typeof (err as { response?: { data?: { message?: string } } }).response?.data?.message === "string"
+          ? (err as { response: { data: { message: string } } }).response.data.message
+          : "Registration failed. Try again."
       )
     } finally {
       setLoading(false)
@@ -142,7 +137,7 @@ const Register = () => {
                   <Button
                     type="submit"
                     disabled={loading}
-                    className="mt-2 w-full rounded-full bg-slate-900 text-white hover:bg-black"
+                    className="mt-2 w-full rounded-full bg-black text-white hover:bg-black"
                   >
                     {loading ? "Creating account..." : "Register"}
                   </Button>

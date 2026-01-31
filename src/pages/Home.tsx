@@ -2,6 +2,7 @@ import { Sparkles, Zap } from "lucide-react"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import OrgMarquee from "../components/OrgMarquee"
+import { ScrollReveal } from "../components/ScrollReveal"
 import { Button } from "../components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { Badge } from "../components/ui/badge"
@@ -97,26 +98,32 @@ const Home = () => {
         <div className="mx-auto flex max-w-6xl flex-col gap-12 px-6 pb-20 pt-14 sm:px-10">
           <section className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
             <div className="flex flex-col gap-6">
-              <Badge className="w-fit border border-dashed border-slate-200 bg-white text-xs uppercase tracking-wide text-slate-600 shadow-sm">
-                From org to team
-              </Badge>
-              <div className="space-y-4">
-                <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-                  One playful space for{" "}
-                  <span className="font-brand-italic">your whole organization</span>
-                </h1>
-                <p className="text-lg text-black sm:text-xl">
-                  HiveSpace lets you create organizations, spin up workspaces, nest multiple projects, and give every team a clear place to track their work.
-                </p>
-              </div>
+              <ScrollReveal direction="up" delay={0}>
+                <Badge className="w-fit border border-dashed border-slate-200 bg-white text-xs uppercase tracking-wide text-slate-600 shadow-sm">
+                  From org to team
+                </Badge>
+              </ScrollReveal>
+              <ScrollReveal direction="up" delay={0.1}>
+                <div className="space-y-4">
+                  <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl text-black">
+                    One playful space for{" "}
+                    <br />
+                    <span className="font-brand-italic text-5xl">your whole organization</span>
+                  </h1>
+                  <p className="text-lg text-black sm:text-xl">
+                    HiveSpace lets you create organizations, spin up workspaces, nest multiple projects, and give every team a clear place to track their work.
+                  </p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal direction="up" delay={0.2}>
               <div className="flex flex-wrap items-center gap-3">
-                <Button size="lg" className="rounded-full bg-slate-900 px-6 text-white hover:bg-black">
+                <Button size="lg" className="rounded-full bg-black px-6 text-white hover:bg-black">
                   Start a board
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="rounded-full border-dashed border-slate-300 bg-white px-6 text-slate-900"
+                  className="rounded-full border-dashed border-black bg-white px-6 text-black"
                   
                 >
                   View docs
@@ -126,15 +133,18 @@ const Home = () => {
                   <span>Setup in under 2 minutes</span>
                 </span>
               </div>
+              </ScrollReveal>
             </div>
 
-            <BoardPreview />
+            <ScrollReveal direction="left" delay={0.15}>
+              <BoardPreview />
+            </ScrollReveal>
           </section>
 
           <section className="grid gap-6 md:grid-cols-3">
-            {HOME_FEATURES.map((feature) => (
+            {HOME_FEATURES.map((feature, i) => (
+              <ScrollReveal key={feature.title} direction="up" delay={i * 0.1}>
               <Card
-                key={feature.title}
                 className="h-full rounded-2xl border-dashed border-slate-200 bg-white shadow-sm backdrop-blur transition hover:-translate-y-1 hover:shadow-md"
               >
                 <CardHeader className="space-y-3">
@@ -147,11 +157,13 @@ const Home = () => {
                   <p className="text-slate-600">{feature.copy}</p>
                 </CardContent>
               </Card>
+              </ScrollReveal>
             ))}
           </section>
 
           <OrgMarquee />
 
+          <ScrollReveal direction="up" delay={0}>
           <section className="rounded-3xl border border-dashed border-slate-200 bg-white p-8 shadow-sm backdrop-blur md:flex md:items-center md:justify-between">
             <div className="space-y-2">
               <Badge className="border border-dashed border-slate-200 bg-amber-50 text-amber-700">
@@ -174,6 +186,7 @@ const Home = () => {
               </Button>
             </div>
           </section>
+          </ScrollReveal>
         </div>
       </main>
 

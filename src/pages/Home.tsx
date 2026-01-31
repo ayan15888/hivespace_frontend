@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { Badge } from "../components/ui/badge"
 import { colors } from "../constants/color"
 import { HOME_BOARD_COLUMNS, HOME_FEATURES, HOME_TAGS, HOME_TAG_STYLES } from "../constants/homeHelpers"
-
+import { Link } from "react-router-dom"
 const StatusTags = () => {
   return (
     <div className="col-span-full mt-2 flex flex-wrap gap-2 text-[11px]">
@@ -120,14 +120,18 @@ const Home = () => {
                 <Button size="lg" className="rounded-full bg-black px-6 text-white hover:bg-black">
                   Start a board
                 </Button>
-                <Button
+                <Button 
                   size="lg"
-                  variant="outline"
-                  className="rounded-full border-dashed border-black bg-white px-6 text-black"
                   
-                >
+                  variant="outline"
+                  className="rounded-full border-dashed border-black bg-white px-6 text-black">
+                  <Link to="/docs" >
+
                   View docs
-                </Button>
+                  </Link>
+                
+                
+                </Button >
                 <span className="flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-sm text-slate-600 shadow-sm backdrop-blur border border-dashed border-amber-900">
                   <Zap className="h-4 w-4 text-amber-500" />
                   <span>Setup in under 2 minutes</span>

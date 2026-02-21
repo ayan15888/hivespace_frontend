@@ -16,10 +16,12 @@ import { Input } from "../components/ui/input"
 import { Button } from "../components/ui/button"
 
 import { colors } from "../constants/color"
+import { useAuth } from "../contexts/AuthContext"
 import { registerUser } from "../services/authservices"
 
 const Register = () => {
   const navigate = useNavigate()
+  const { login } = useAuth()
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -31,6 +33,7 @@ const Register = () => {
     setLoading(true)
     try {
       await registerUser({ username, email, password })
+      login()
       navigate("/dashboard")
     } catch (err: unknown) {
       setError(
@@ -50,7 +53,6 @@ const Register = () => {
           { path: "/", label: "Home" },
           { path: "/docs", label: "Docs" },
         ]}
-        buttons={[{ label: "Login", path: "/login" }]}
       />
 
       <main

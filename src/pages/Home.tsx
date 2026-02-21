@@ -83,10 +83,6 @@ const Home = () => {
           { path: "/", label: "Home" },
           { path: "/docs", label: "Docs" },
         ]}
-        buttons={[
-          { label: "Login", path: "/login" },
-          { label: "Register", path: "/register" },
-        ]}
       />
 
       <main
@@ -99,7 +95,7 @@ const Home = () => {
           <section className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
             <div className="flex flex-col gap-6">
               <ScrollReveal direction="up" delay={0}>
-                <Badge className="w-fit border border-dashed border-slate-200 bg-white text-xs uppercase tracking-wide text-slate-600 shadow-sm">
+                <Badge className="w-fit border border-dashed border-black bg-white text-xs uppercase tracking-wide text-black shadow-sm">
                   From org to team
                 </Badge>
               </ScrollReveal>

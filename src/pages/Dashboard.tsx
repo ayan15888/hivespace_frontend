@@ -64,7 +64,6 @@ const Dashboard = () => {
           { path: "/docs", label: "Docs" },
           { path: "/dashboard", label: "Dashboard" },
         ]}
-        buttons={[{ label: "Log out", path: "/" }]}
       />
 
       <main className="flex-1 border-t border-dashed border-slate-200 bg-slate-50/50">

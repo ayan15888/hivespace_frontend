@@ -1,4 +1,5 @@
 import { Sparkles } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { Label } from "../components/ui/label"
@@ -6,8 +7,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../co
 import { Input } from "../components/ui/input"
 import { Button } from "../components/ui/button"
 import { colors } from "../constants/color"
+import { useAuth } from "../contexts/AuthContext"
 
 const Login = () => {
+  const navigate = useNavigate()
+  const { login } = useAuth()
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    login()
+    navigate("/dashboard")
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-white text-slate-900">
       <Navbar
@@ -15,7 +26,6 @@ const Login = () => {
           { path: "/", label: "Home" },
           { path: "/docs", label: "Docs" },
         ]}
-        buttons={[{ label: "Register", path: "/register" }]}
       />
 
       <main
@@ -47,7 +57,7 @@ const Login = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form className="space-y-5">
+                <form className="space-y-5" onSubmit={handleSubmit}>
                   <div className="grid gap-2">
                     <Label htmlFor="email" className="text-slate-800">
                       Email

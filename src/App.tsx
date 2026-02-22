@@ -6,6 +6,10 @@ import Register from "./pages/Register"
 import Docs from "./components/Docs"
 import LoadingSplash from "./components/LoadingSplash"
 import Dashboard from "./pages/Dashboard"
+import OrganizationDetail from "./pages/OrganizationDetail"
+import WorkspaceDetail from "./pages/WorkspaceDetail"
+import ProjectDetail from "./pages/ProjectDetail"
+import TeamDetail from "./pages/TeamDetail"
 
 const App = () => {
   const [showSplash, setShowSplash] = useState(true)
@@ -24,7 +28,10 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard/>} />
-        
+        <Route path="/organization/:orgId" element={<OrganizationDetail />} />
+        <Route path="/organization/:orgId/workspace/:workspaceId" element={<WorkspaceDetail />} />
+        <Route path="/organization/:orgId/workspace/:workspaceId/project/:projectId" element={<ProjectDetail />} />
+        <Route path="/organization/:orgId/workspace/:workspaceId/project/:projectId/team/:teamId" element={<TeamDetail />} />
       </Routes>
     </>
   )

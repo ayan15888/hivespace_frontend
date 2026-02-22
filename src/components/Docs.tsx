@@ -172,10 +172,14 @@ const Docs = () => {
                           <li>
                             <strong>Team</strong> – Execution unit
                           </li>
+                          <li>
+                            <strong>Employee</strong> – Team member or part of team
+                          </li>
                         </ol>
                         <p>
                           Every task belongs to exactly one team, ensuring
-                          accountability and clean reporting.
+                          accountability and clean reporting. Teams can have multiple employees
+                          who collaborate on tasks and projects.
                         </p>
                       </CardContent>
                     </Card>
@@ -195,6 +199,7 @@ const Docs = () => {
                           <li>Workspace: Engineering</li>
                           <li>Projects: Web, Mobile</li>
                           <li>Teams: Core, Platform</li>
+                          <li>Employees: Team members assigned to each team</li>
                         </ul>
                       </CardContent>
                     </Card>
@@ -250,6 +255,7 @@ const Docs = () => {
                       <li>Create workspace</li>
                       <li>Create project</li>
                       <li>Add teams</li>
+                      <li>Add employees to teams</li>
                       <li>Create and track tasks</li>
                     </ol>
                   </CardContent>

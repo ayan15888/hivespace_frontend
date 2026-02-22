@@ -1,5 +1,6 @@
 import { useState } from "react"
-import { Building2, KeyRound, Sparkles, X } from "lucide-react"
+import { useNavigate } from "react-router-dom"
+import { Building2, KeyRound, Sparkles, X, ArrowRight } from "lucide-react"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { Button } from "../components/ui/button"
@@ -15,6 +16,7 @@ type OrgItem = {
 }
 
 const Dashboard = () => {
+  const navigate = useNavigate()
   const [orgs, setOrgs] = useState<OrgItem[]>([])
   const [joinModalOpen, setJoinModalOpen] = useState(false)
   const [accessCode, setAccessCode] = useState("")
@@ -161,19 +163,25 @@ const Dashboard = () => {
                 {orgs.map((org) => (
                   <li
                     key={org.id}
-                    className="flex items-center justify-between rounded-2xl border border-dashed border-slate-200 bg-white px-4 py-3 shadow-sm"
+                    className="group flex items-center justify-between rounded-2xl border border-dashed border-slate-200 bg-white px-4 py-3 shadow-sm transition-all hover:shadow-md cursor-pointer"
+                    onClick={() => navigate(`/organization/${org.id}`, {
+                      state: { orgName: org.name }
+                    })}
                   >
                     <span className="font-medium text-slate-900">{org.name}</span>
-                    <Badge
-                      variant="secondary"
-                      className={
-                        org.type === "created"
-                          ? "border-amber-200 bg-amber-50 text-amber-800"
-                          : "border-sky-200 bg-sky-50 text-sky-800"
-                      }
-                    >
-                      {org.type === "created" ? "Created" : "Joined"}
-                    </Badge>
+                    <div className="flex items-center gap-2">
+                      <Badge
+                        variant="secondary"
+                        className={
+                          org.type === "created"
+                            ? "border-amber-200 bg-amber-50 text-amber-800"
+                            : "border-sky-200 bg-sky-50 text-sky-800"
+                        }
+                      >
+                        {org.type === "created" ? "Created" : "Joined"}
+                      </Badge>
+                      <ArrowRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1" />
+                    </div>
                   </li>
                 ))}
               </ul>
